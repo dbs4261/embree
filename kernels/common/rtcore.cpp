@@ -240,6 +240,30 @@ RTC_NAMESPACE_BEGIN;
     return nullptr;
   }
 
+  RTC_API bool rtcIsBufferShared(RTCBuffer hbuffer)
+  {
+    Buffer* buffer = (Buffer*)hbuffer;
+    RTC_CATCH_BEGIN;
+    RTC_TRACE(rtcIsBufferShared);
+    RTC_VERIFY_HANDLE(hbuffer);
+    RTC_ENTER_DEVICE(hbuffer);
+    return buffer->isShared();
+    RTC_CATCH_END2(buffer);
+    return false;
+  }
+
+  RTC_API size_t rtcGetBufferSize(RTCBuffer hbuffer)
+  {
+    Buffer* buffer = (Buffer*)hbuffer;
+    RTC_CATCH_BEGIN;
+    RTC_TRACE(rtcGetBufferSize);
+    RTC_VERIFY_HANDLE(hbuffer);
+    RTC_ENTER_DEVICE(hbuffer);
+    return buffer->bytes();
+    RTC_CATCH_END2(buffer);
+    return 0;
+  }
+
   RTC_API void* rtcGetBufferData(RTCBuffer hbuffer)
   {
     Buffer* buffer = (Buffer*)hbuffer;
